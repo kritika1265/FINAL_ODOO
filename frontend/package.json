@@ -34,7 +34,8 @@
     "recharts": "^2.10.3",
     "classnames": "^2.3.2",
     "lodash": "^4.17.21",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "lucide-react": "^0.294.0"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
@@ -80,22 +81,11 @@
     "aws-sdk": "^2.1514.0"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "production": [">0.2%", "not dead", "not op_mini all"],
+    "development": ["last 1 chrome version", "last 1 firefox version", "last 1 safari version"]
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "prettier"
-    ],
+    "extends": ["react-app", "prettier"],
     "rules": {
       "no-unused-vars": "warn",
       "no-console": "warn",
@@ -113,25 +103,5 @@
   "engines": {
     "node": ">=16.0.0",
     "npm": ">=8.0.0"
-  },
-  "keywords": [
-    "rental",
-    "management",
-    "erp",
-    "quotation",
-    "inventory",
-    "invoicing",
-    "react",
-    "nodejs",
-    "express",
-    "postgresql"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yourusername/rental-management-system.git"
-  },
-  "bugs": {
-    "url": "https://github.com/yourusername/rental-management-system/issues"
-  },
-  "homepage": "https://github.com/yourusername/rental-management-system#readme"
+  }
 }
