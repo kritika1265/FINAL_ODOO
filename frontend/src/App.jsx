@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './hooks/useAuth';
-import { CartProvider } from './hooks/useCart';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
 
 // Layout Components
 import Header from './components/Layout/Header';
@@ -9,36 +9,36 @@ import Footer from './components/Layout/Footer';
 import Sidebar from './components/Layout/Sidebar';
 
 // Public Pages
-import Home from './pages/Home';
-import Login from './pages/Auth/Login';
-import Signup from './pages/Auth/Signup';
-import ForgotPassword from './pages/Auth/ForgotPassword';
-import ResetPassword from './pages/Auth/ResetPassword';
-import ProductList from './pages/Products/ProductList';
-import ProductDetail from './pages/Products/ProductDetail';
-import Cart from './pages/Cart/Cart';
-import Checkout from './pages/Checkout/Checkout';
+import Home from './pages/customer/Home';
+import Login from './pages/auth/Login';
+import Signup from './pages/auth/Signup';
+import ForgotPassword from './pages/auth/Forgotpassword';
+import ResetPassword from './pages/auth/ResetPassword';
+import ProductList from './pages/customer/Products';
+import ProductDetail from './pages/customer/Productdetails';
+import Cart from './pages/customer/Cart';
+import Checkout from './pages/customer/Checkout';
 
 // Customer Pages
-import CustomerDashboard from './pages/Customer/Dashboard';
-import CustomerOrders from './pages/Customer/Orders';
-import CustomerInvoices from './pages/Customer/Invoices';
-import CustomerProfile from './pages/Customer/Profile';
+import CustomerDashboard from './pages/customer/Dashboard';
+import CustomerOrders from './pages/customer/Myorders';
+import CustomerInvoices from './pages/customer/Invoices';
+import CustomerProfile from './pages/customer/Profile';
 
 // Vendor Pages
-import VendorDashboard from './pages/Vendor/Dashboard';
-import VendorProducts from './pages/Vendor/Products';
-import VendorOrders from './pages/Vendor/Orders';
-import VendorInvoices from './pages/Vendor/Invoices';
-import VendorReports from './pages/Vendor/Reports';
+import VendorDashboard from './pages/vendor/VendorDashboard';
+import VendorProducts from './pages/vendor/Productmanagement';
+import VendorOrders from './pages/vendor/Ordermanagement';
+import VendorInvoices from './pages/vendor/Invoicemanagement';
+import VendorReports from './pages/vendor/Reports';
 
 // Admin Pages
-import AdminDashboard from './pages/Admin/Dashboard';
-import AdminUsers from './pages/Admin/Users';
-import AdminProducts from './pages/Admin/Products';
-import AdminOrders from './pages/Admin/Orders';
-import AdminSettings from './pages/Admin/Settings';
-import AdminReports from './pages/Admin/Reports';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminUsers from './pages/admin/Usermanagement';
+import AdminProducts from './pages/admin/Products';
+import AdminOrders from './pages/admin/Orders';
+import AdminSettings from './pages/admin/Settings';
+import AdminReports from './pages/admin/Reports';
 
 // Error Pages
 import NotFound from './pages/NotFound';
