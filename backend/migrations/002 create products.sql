@@ -1,141 +1,179 @@
--- Migration: 002_create_products.sql
--- Description: Create products table with rental support, variants, and inventory tracking
+-- Migration: 003_create_rental_pricing.sql
+-- Description: Create rental pricing tables with support for hourly, daily, weekly, and custom periods
 -- Created: 2026-01-31
 
--- Product Categories
-CREATE TABLE IF NOT EXISTS product_categories (
+-- Rental Periods Configuration (managed in Settings)
+CREATE TABLE IF NOT EXISTS rental_periods (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE,
-    description TEXT,
-    parent_id BIGINT REFERENCES product_categories(id) ON DELETE SET NULL,
-    slug VARCHAR(150) NOT NULL UNIQUE,
+    name VARCHAR(50) NOT NULL UNIQUE, -- Hourly, Daily, Weekly, Monthly, Custom
+    code VARCHAR(20) NOT NULL UNIQUE, -- hourly, daily, weekly, monthly, custom
+    duration_in_hours INTEGER, -- Base duration in hours (NULL for custom)
     is_active BOOLEAN DEFAULT TRUE,
     display_order INTEGER DEFAULT 0,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
--- Product Attributes (configurable from Settings)
-CREATE TABLE IF NOT EXISTS product_attributes (
-    id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE, -- e.g., Brand, Color, Size
-    code VARCHAR(50) NOT NULL UNIQUE, -- e.g., brand, color, size
-    input_type VARCHAR(50) NOT NULL DEFAULT 'select', -- select, text, number
-    is_variant BOOLEAN DEFAULT FALSE, -- If true, used for creating variants
-    is_required BOOLEAN DEFAULT FALSE,
-    display_order INTEGER DEFAULT 0,
-    is_active BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     
-    CONSTRAINT product_attributes_input_type_check CHECK (
-        input_type IN ('select', 'text', 'number', 'multiselect')
+    CONSTRAINT rental_periods_code_check CHECK (
+        code IN ('hourly', 'daily', 'weekly', 'monthly', 'custom')
     )
 );
 
--- Product Attribute Values (configurable from Settings)
-CREATE TABLE IF NOT EXISTS product_attribute_values (
-    id BIGSERIAL PRIMARY KEY,
-    attribute_id BIGINT NOT NULL REFERENCES product_attributes(id) ON DELETE CASCADE,
-    value VARCHAR(255) NOT NULL,
-    display_order INTEGER DEFAULT 0,
-    is_active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    
-    CONSTRAINT unique_attribute_value UNIQUE (attribute_id, value)
-);
+-- Insert default rental periods
+INSERT INTO rental_periods (name, code, duration_in_hours, display_order) VALUES
+    ('Hourly', 'hourly', 1, 1),
+    ('Daily', 'daily', 24, 2),
+    ('Weekly', 'weekly', 168, 3),
+    ('Monthly', 'monthly', 720, 4),
+    ('Custom Period', 'custom', NULL, 5)
+ON CONFLICT (code) DO NOTHING;
 
--- Main Products Table
-CREATE TABLE IF NOT EXISTS products (
+-- Rental Pricing for Products
+CREATE TABLE IF NOT EXISTS rental_pricing (
     id BIGSERIAL PRIMARY KEY,
-    vendor_id BIGINT NOT NULL REFERENCES users(id) ON DELETE RESTRICT, -- Product owner
-    category_id BIGINT REFERENCES product_categories(id) ON DELETE SET NULL,
-    
-    -- Basic Information
-    sku VARCHAR(100) NOT NULL UNIQUE,
-    name VARCHAR(255) NOT NULL,
-    slug VARCHAR(300) NOT NULL UNIQUE,
-    description TEXT,
-    short_description VARCHAR(500),
-    
-    -- Rental Configuration
-    is_rentable BOOLEAN DEFAULT TRUE,
-    rental_enabled BOOLEAN DEFAULT TRUE,
-    
-    -- Inventory
-    quantity_on_hand INTEGER NOT NULL DEFAULT 0,
-    quantity_available INTEGER NOT NULL DEFAULT 0, -- Available for rental
-    quantity_reserved INTEGER NOT NULL DEFAULT 0, -- Currently reserved/rented
-    quantity_maintenance INTEGER NOT NULL DEFAULT 0, -- In maintenance
+    product_id BIGINT REFERENCES products(id) ON DELETE CASCADE,
+    variant_id BIGINT REFERENCES product_variants(id) ON DELETE CASCADE,
+    rental_period_id BIGINT NOT NULL REFERENCES rental_periods(id) ON DELETE RESTRICT,
     
     -- Pricing
-    cost_price DECIMAL(10, 2) NOT NULL DEFAULT 0.00,
-    sales_price DECIMAL(10, 2) NOT NULL DEFAULT 0.00, -- For direct sale if applicable
+    price_per_period DECIMAL(10, 2) NOT NULL,
+    currency VARCHAR(3) NOT NULL DEFAULT 'INR',
     
-    -- Product Details
-    brand VARCHAR(100),
-    model VARCHAR(100),
-    specifications JSONB,
+    -- Custom Period Configuration (only for custom periods)
+    custom_period_hours INTEGER, -- Number of hours for custom period
+    custom_period_name VARCHAR(100), -- e.g., "Weekend (48 hours)"
     
-    -- Media
-    featured_image TEXT,
-    image_gallery TEXT[], -- Array of image URLs
+    -- Minimum rental duration
+    min_quantity INTEGER DEFAULT 1, -- Minimum number of periods to rent
+    max_quantity INTEGER, -- Maximum number of periods (NULL = unlimited)
     
-    -- SEO
-    meta_title VARCHAR(255),
-    meta_description TEXT,
-    meta_keywords TEXT[],
-    
-    -- Publishing
-    is_published BOOLEAN DEFAULT FALSE, -- Publish/Unpublish on website
-    published_at TIMESTAMP,
-    
-    -- Physical Attributes
-    weight DECIMAL(10, 2), -- in kg
-    dimensions JSONB, -- {length, width, height} in cm
+    -- Discounts
+    bulk_discount_threshold INTEGER, -- Rent X or more periods to get discount
+    bulk_discount_percentage DECIMAL(5, 2) DEFAULT 0.00,
     
     -- Status
-    status VARCHAR(50) NOT NULL DEFAULT 'active',
+    is_active BOOLEAN DEFAULT TRUE,
+    priority INTEGER DEFAULT 0, -- Higher priority pricing shown first
     
-    -- Timestamps
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    deleted_at TIMESTAMP,
     
-    CONSTRAINT products_status_check CHECK (
-        status IN ('active', 'inactive', 'discontinued', 'draft')
+    CONSTRAINT rental_pricing_product_or_variant_check CHECK (
+        (product_id IS NOT NULL AND variant_id IS NULL) OR
+        (product_id IS NULL AND variant_id IS NOT NULL)
     ),
-    CONSTRAINT products_inventory_check CHECK (
-        quantity_on_hand >= 0 AND
-        quantity_available >= 0 AND
-        quantity_reserved >= 0 AND
-        quantity_maintenance >= 0 AND
-        quantity_on_hand >= (quantity_available + quantity_reserved + quantity_maintenance)
-    )
+    CONSTRAINT rental_pricing_price_check CHECK (price_per_period >= 0),
+    CONSTRAINT rental_pricing_quantity_check CHECK (
+        min_quantity > 0 AND 
+        (max_quantity IS NULL OR max_quantity >= min_quantity)
+    ),
+    CONSTRAINT rental_pricing_discount_check CHECK (
+        bulk_discount_percentage >= 0 AND bulk_discount_percentage <= 100
+    ),
+    CONSTRAINT rental_pricing_unique UNIQUE NULLS NOT DISTINCT (product_id, variant_id, rental_period_id)
 );
 
--- Product Variants (for variant-based pricing)
-CREATE TABLE IF NOT EXISTS product_variants (
+-- Security Deposit Configuration
+CREATE TABLE IF NOT EXISTS security_deposits (
     id BIGSERIAL PRIMARY KEY,
-    product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+    product_id BIGINT REFERENCES products(id) ON DELETE CASCADE,
+    variant_id BIGINT REFERENCES product_variants(id) ON DELETE CASCADE,
     
-    -- Variant Identification
-    sku VARCHAR(100) NOT NULL UNIQUE,
-    variant_name VARCHAR(255) NOT NULL, -- e.g., "Red - Large"
+    -- Deposit amount
+    deposit_amount DECIMAL(10, 2) NOT NULL,
+    deposit_type VARCHAR(50) NOT NULL DEFAULT 'fixed', -- fixed, percentage_of_rental
+    percentage_value DECIMAL(5, 2), -- Used if deposit_type is percentage
     
-    -- Inventory (overrides parent product if set)
-    quantity_on_hand INTEGER NOT NULL DEFAULT 0,
-    quantity_available INTEGER NOT NULL DEFAULT 0,
-    quantity_reserved INTEGER NOT NULL DEFAULT 0,
+    -- Refund policy
+    refund_days INTEGER DEFAULT 7, -- Days after return to refund deposit
+    auto_refund BOOLEAN DEFAULT FALSE,
     
-    -- Pricing (overrides parent product pricing)
-    cost_price DECIMAL(10, 2),
-    sales_price DECIMAL(10, 2),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     
-    -- Media
-    featured_image TEXT,
-    image_gallery TEXT[],
+    CONSTRAINT security_deposits_product_or_variant_check CHECK (
+        (product_id IS NOT NULL AND variant_id IS NULL) OR
+        (product_id IS NULL AND variant_id IS NOT NULL)
+    ),
+    CONSTRAINT security_deposits_type_check CHECK (
+        deposit_type IN ('fixed', 'percentage_of_rental')
+    ),
+    CONSTRAINT security_deposits_amount_check CHECK (deposit_amount >= 0),
+    CONSTRAINT security_deposits_percentage_check CHECK (
+        (deposit_type = 'fixed') OR 
+        (deposit_type = 'percentage_of_rental' AND percentage_value > 0 AND percentage_value <= 100)
+    ),
+    CONSTRAINT security_deposits_unique UNIQUE NULLS NOT DISTINCT (product_id, variant_id)
+);
+
+-- Late Return Fee Configuration
+CREATE TABLE IF NOT EXISTS late_return_fees (
+    id BIGSERIAL PRIMARY KEY,
+    product_id BIGINT REFERENCES products(id) ON DELETE CASCADE,
+    variant_id BIGINT REFERENCES product_variants(id) ON DELETE CASCADE,
+    
+    -- Fee configuration
+    fee_type VARCHAR(50) NOT NULL DEFAULT 'per_day', -- per_hour, per_day, percentage_of_rental
+    fee_amount DECIMAL(10, 2) NOT NULL,
+    percentage_value DECIMAL(5, 2), -- Used if fee_type is percentage
+    
+    -- Grace period
+    grace_period_hours INTEGER DEFAULT 0, -- Hours of grace before charging late fee
+    
+    -- Maximum fee cap
+    max_fee_amount DECIMAL(10, 2), -- Maximum late fee that can be charged
+    
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    
+    CONSTRAINT late_return_fees_product_or_variant_check CHECK (
+        (product_id IS NOT NULL AND variant_id IS NULL) OR
+        (product_id IS NULL AND variant_id IS NOT NULL)
+    ),
+    CONSTRAINT late_return_fees_type_check CHECK (
+        fee_type IN ('per_hour', 'per_day', 'percentage_of_rental', 'fixed')
+    ),
+    CONSTRAINT late_return_fees_amount_check CHECK (fee_amount >= 0),
+    CONSTRAINT late_return_fees_percentage_check CHECK (
+        (fee_type != 'percentage_of_rental') OR 
+        (percentage_value > 0 AND percentage_value <= 100)
+    ),
+    CONSTRAINT late_return_fees_unique UNIQUE NULLS NOT DISTINCT (product_id, variant_id)
+);
+
+-- Pricing Rules (for promotional discounts, seasonal pricing, etc.)
+CREATE TABLE IF NOT EXISTS pricing_rules (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    
+    -- Rule Type
+    rule_type VARCHAR(50) NOT NULL, -- discount, surcharge
+    
+    -- Discount/Surcharge Configuration
+    modifier_type VARCHAR(50) NOT NULL, -- percentage, fixed_amount
+    modifier_value DECIMAL(10, 2) NOT NULL,
+    
+    -- Applicability
+    applies_to VARCHAR(50) NOT NULL DEFAULT 'all', -- all, category, product, vendor
+    category_id BIGINT REFERENCES product_categories(id) ON DELETE CASCADE,
+    product_id BIGINT REFERENCES products(id) ON DELETE CASCADE,
+    vendor_id BIGINT REFERENCES users(id) ON DELETE CASCADE,
+    
+    -- Customer targeting
+    customer_type VARCHAR(50) DEFAULT 'all', -- all, new_customers, returning_customers
+    min_order_value DECIMAL(10, 2) DEFAULT 0.00,
+    
+    -- Date range
+    valid_from TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    valid_until TIMESTAMP,
+    
+    -- Days of week (NULL means all days)
+    applicable_days INTEGER[], -- Array: 0=Sunday, 1=Monday, ..., 6=Saturday
+    
+    -- Priority
+    priority INTEGER DEFAULT 0, -- Higher priority rules evaluated first
     
     -- Status
     is_active BOOLEAN DEFAULT TRUE,
@@ -143,120 +181,81 @@ CREATE TABLE IF NOT EXISTS product_variants (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     
-    CONSTRAINT product_variants_inventory_check CHECK (
-        quantity_on_hand >= 0 AND
-        quantity_available >= 0 AND
-        quantity_reserved >= 0 AND
-        quantity_on_hand >= (quantity_available + quantity_reserved)
+    CONSTRAINT pricing_rules_rule_type_check CHECK (
+        rule_type IN ('discount', 'surcharge')
+    ),
+    CONSTRAINT pricing_rules_modifier_type_check CHECK (
+        modifier_type IN ('percentage', 'fixed_amount')
+    ),
+    CONSTRAINT pricing_rules_applies_check CHECK (
+        applies_to IN ('all', 'category', 'product', 'vendor')
+    ),
+    CONSTRAINT pricing_rules_customer_type_check CHECK (
+        customer_type IN ('all', 'new_customers', 'returning_customers')
+    ),
+    CONSTRAINT pricing_rules_dates_check CHECK (
+        valid_until IS NULL OR valid_until >= valid_from
     )
-);
-
--- Product Variant Attribute Values (links variants to their attribute values)
-CREATE TABLE IF NOT EXISTS product_variant_attributes (
-    id BIGSERIAL PRIMARY KEY,
-    variant_id BIGINT NOT NULL REFERENCES product_variants(id) ON DELETE CASCADE,
-    attribute_id BIGINT NOT NULL REFERENCES product_attributes(id) ON DELETE CASCADE,
-    attribute_value_id BIGINT REFERENCES product_attribute_values(id) ON DELETE CASCADE,
-    custom_value VARCHAR(255), -- For text/number inputs
-    
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    
-    CONSTRAINT unique_variant_attribute UNIQUE (variant_id, attribute_id)
-);
-
--- Product Attribute Assignments (for non-variant attributes)
-CREATE TABLE IF NOT EXISTS product_attribute_assignments (
-    id BIGSERIAL PRIMARY KEY,
-    product_id BIGINT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
-    attribute_id BIGINT NOT NULL REFERENCES product_attributes(id) ON DELETE CASCADE,
-    attribute_value_id BIGINT REFERENCES product_attribute_values(id) ON DELETE CASCADE,
-    custom_value VARCHAR(255),
-    
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    
-    CONSTRAINT unique_product_attribute UNIQUE (product_id, attribute_id)
 );
 
 -- Create indexes
-CREATE INDEX idx_products_vendor_id ON products(vendor_id);
-CREATE INDEX idx_products_category_id ON products(category_id);
-CREATE INDEX idx_products_sku ON products(sku);
-CREATE INDEX idx_products_slug ON products(slug);
-CREATE INDEX idx_products_is_rentable ON products(is_rentable);
-CREATE INDEX idx_products_is_published ON products(is_published);
-CREATE INDEX idx_products_status ON products(status);
-CREATE INDEX idx_products_brand ON products(brand);
-CREATE INDEX idx_products_deleted_at ON products(deleted_at) WHERE deleted_at IS NULL;
+CREATE INDEX idx_rental_periods_code ON rental_periods(code);
+CREATE INDEX idx_rental_periods_active ON rental_periods(is_active);
 
-CREATE INDEX idx_product_categories_parent_id ON product_categories(parent_id);
-CREATE INDEX idx_product_categories_slug ON product_categories(slug);
-CREATE INDEX idx_product_categories_active ON product_categories(is_active);
+CREATE INDEX idx_rental_pricing_product_id ON rental_pricing(product_id);
+CREATE INDEX idx_rental_pricing_variant_id ON rental_pricing(variant_id);
+CREATE INDEX idx_rental_pricing_period_id ON rental_pricing(rental_period_id);
+CREATE INDEX idx_rental_pricing_active ON rental_pricing(is_active);
 
-CREATE INDEX idx_product_attributes_code ON product_attributes(code);
-CREATE INDEX idx_product_attributes_is_variant ON product_attributes(is_variant);
+CREATE INDEX idx_security_deposits_product_id ON security_deposits(product_id);
+CREATE INDEX idx_security_deposits_variant_id ON security_deposits(variant_id);
 
-CREATE INDEX idx_product_attribute_values_attribute_id ON product_attribute_values(attribute_id);
+CREATE INDEX idx_late_return_fees_product_id ON late_return_fees(product_id);
+CREATE INDEX idx_late_return_fees_variant_id ON late_return_fees(variant_id);
 
-CREATE INDEX idx_product_variants_product_id ON product_variants(product_id);
-CREATE INDEX idx_product_variants_sku ON product_variants(sku);
-CREATE INDEX idx_product_variants_active ON product_variants(is_active);
-
-CREATE INDEX idx_product_variant_attributes_variant_id ON product_variant_attributes(variant_id);
-CREATE INDEX idx_product_variant_attributes_attribute_id ON product_variant_attributes(attribute_id);
-
-CREATE INDEX idx_product_attribute_assignments_product_id ON product_attribute_assignments(product_id);
-CREATE INDEX idx_product_attribute_assignments_attribute_id ON product_attribute_assignments(attribute_id);
+CREATE INDEX idx_pricing_rules_type ON pricing_rules(rule_type);
+CREATE INDEX idx_pricing_rules_applies_to ON pricing_rules(applies_to);
+CREATE INDEX idx_pricing_rules_category_id ON pricing_rules(category_id);
+CREATE INDEX idx_pricing_rules_product_id ON pricing_rules(product_id);
+CREATE INDEX idx_pricing_rules_vendor_id ON pricing_rules(vendor_id);
+CREATE INDEX idx_pricing_rules_active ON pricing_rules(is_active);
+CREATE INDEX idx_pricing_rules_dates ON pricing_rules(valid_from, valid_until);
 
 -- Create triggers
-CREATE TRIGGER update_products_updated_at
-    BEFORE UPDATE ON products
+CREATE TRIGGER update_rental_periods_updated_at
+    BEFORE UPDATE ON rental_periods
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
 
-CREATE TRIGGER update_product_categories_updated_at
-    BEFORE UPDATE ON product_categories
+CREATE TRIGGER update_rental_pricing_updated_at
+    BEFORE UPDATE ON rental_pricing
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
 
-CREATE TRIGGER update_product_attributes_updated_at
-    BEFORE UPDATE ON product_attributes
+CREATE TRIGGER update_security_deposits_updated_at
+    BEFORE UPDATE ON security_deposits
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
 
-CREATE TRIGGER update_product_attribute_values_updated_at
-    BEFORE UPDATE ON product_attribute_values
+CREATE TRIGGER update_late_return_fees_updated_at
+    BEFORE UPDATE ON late_return_fees
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
 
-CREATE TRIGGER update_product_variants_updated_at
-    BEFORE UPDATE ON product_variants
+CREATE TRIGGER update_pricing_rules_updated_at
+    BEFORE UPDATE ON pricing_rules
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
-
--- Function to auto-generate slug
-CREATE OR REPLACE FUNCTION generate_slug(input_text TEXT)
-RETURNS TEXT AS $$
-BEGIN
-    RETURN LOWER(
-        REGEXP_REPLACE(
-            REGEXP_REPLACE(input_text, '[^a-zA-Z0-9\s-]', '', 'g'),
-            '\s+', '-', 'g'
-        )
-    );
-END;
-$$ LANGUAGE plpgsql IMMUTABLE;
 
 -- Add comments
-COMMENT ON TABLE products IS 'Main products table with rental support and inventory tracking';
-COMMENT ON TABLE product_categories IS 'Product categories for organization and filtering';
-COMMENT ON TABLE product_attributes IS 'Configurable product attributes (Brand, Color, etc.)';
-COMMENT ON TABLE product_attribute_values IS 'Possible values for each attribute';
-COMMENT ON TABLE product_variants IS 'Product variants with different attribute combinations';
-COMMENT ON TABLE product_variant_attributes IS 'Links variants to their specific attribute values';
-COMMENT ON TABLE product_attribute_assignments IS 'Assigns non-variant attributes to products';
+COMMENT ON TABLE rental_periods IS 'Configurable rental periods (Hourly, Daily, Weekly, Custom)';
+COMMENT ON TABLE rental_pricing IS 'Rental pricing per product/variant for different time periods';
+COMMENT ON TABLE security_deposits IS 'Security deposit configuration for products';
+COMMENT ON TABLE late_return_fees IS 'Late return fee configuration for products';
+COMMENT ON TABLE pricing_rules IS 'Promotional and seasonal pricing rules';
 
-COMMENT ON COLUMN products.is_rentable IS 'Whether this product can be rented';
-COMMENT ON COLUMN products.is_published IS 'Whether product is visible on website (Publish/Unpublish)';
-COMMENT ON COLUMN products.vendor_id IS 'Vendor who owns this product';
-COMMENT ON COLUMN products.quantity_available IS 'Quantity available for new rentals';
-COMMENT ON COLUMN products.quantity_reserved IS 'Quantity currently rented or reserved';
+COMMENT ON COLUMN rental_pricing.price_per_period IS 'Price per rental period (e.g., price per hour, per day, per week)';
+COMMENT ON COLUMN rental_pricing.custom_period_hours IS 'For custom periods, number of hours in the period';
+COMMENT ON COLUMN security_deposits.deposit_type IS 'Fixed amount or percentage of rental value';
+COMMENT ON COLUMN late_return_fees.grace_period_hours IS 'Grace period before late fees are charged';
+COMMENT ON COLUMN pricing_rules.applicable_days IS 'Array of day numbers when rule applies (0=Sun, 6=Sat)';
