@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders - RentPro</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <a href="../products.html" class="nav-link">Products</a>
+        <a href="../cart.html" class="nav-link">Cart</a>
+        <span style="color: var(--color-text-muted);">John Doe</span>
+        <a href="../login.html" class="btn btn-secondary btn-sm">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3 style="margin-bottom: var(--space-lg); font-size: 1rem;">Customer Portal</h3>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+        <a href="orders.html" class="sidebar-link active">My Orders</a>
+        <a href="invoices.html" class="sidebar-link">Invoices</a>
+        <a href="../products.html" class="sidebar-link">Browse Products</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-md);">
+        <div>
+          <h1>My Orders</h1>
+          <p>Track your rental orders and status</p>
+        </div>
+        <select class="form-select" style="width: 160px;">
+          <option>All Status</option>
+          <option>Confirmed</option>
+          <option>Picked Up</option>
+          <option>With Customer</option>
+          <option>Returned</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Products</th>
+                <th>Rental Period</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#ORD-2025-003</strong></td>
+                <td>01 Feb 2025</td>
+                <td>Scissor Lift 12m</td>
+                <td>05 Feb - 12 Feb 2025</td>
+                <td>₹12,600</td>
+                <td><span class="badge badge-info">Confirmed</span></td>
+                <td><a href="order-detail.html" class="btn btn-secondary btn-sm">View</a></td>
+              </tr>
+              <tr>
+                <td><strong>#ORD-2025-002</strong></td>
+                <td>28 Jan 2025</td>
+                <td>Industrial Forklift</td>
+                <td>04 Feb - 08 Feb 2025</td>
+                <td>₹5,664</td>
+                <td><span class="badge badge-info">Picked Up</span></td>
+                <td><a href="order-detail.html" class="btn btn-secondary btn-sm">View</a></td>
+              </tr>
+              <tr>
+                <td><strong>#ORD-2025-001</strong></td>
+                <td>25 Jan 2025</td>
+                <td>Heavy Duty Excavator</td>
+                <td>03 Feb - 06 Feb 2025</td>
+                <td>₹8,850</td>
+                <td><span class="badge badge-success">With Customer</span></td>
+                <td><a href="order-detail.html" class="btn btn-secondary btn-sm">View</a></td>
+              </tr>
+              <tr>
+                <td><strong>#ORD-2024-045</strong></td>
+                <td>15 Jan 2025</td>
+                <td>Diesel Generator, Concrete Mixer</td>
+                <td>16 Jan - 20 Jan 2025</td>
+                <td>₹18,086</td>
+                <td><span class="badge badge-success">Returned</span></td>
+                <td><a href="order-detail.html" class="btn btn-secondary btn-sm">View</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

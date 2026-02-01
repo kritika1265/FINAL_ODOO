@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - RentPro Admin</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <span style="color: var(--color-text-muted);">Admin</span>
+        <a href="../login.html" class="btn btn-secondary btn-sm">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3 style="margin-bottom: var(--space-lg); font-size: 1rem;">Admin Panel</h3>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+        <a href="vendors.html" class="sidebar-link">Vendors</a>
+        <a href="products.html" class="sidebar-link active">Products</a>
+        <a href="orders.html" class="sidebar-link">Orders</a>
+        <a href="reports.html" class="sidebar-link">Reports</a>
+        <a href="settings.html" class="sidebar-link">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-md);">
+        <div>
+          <h1>All Products</h1>
+          <p>Global product catalog across all vendors</p>
+        </div>
+        <select class="form-select" style="width: 180px;">
+          <option>All Vendors</option>
+          <option>ABC Rentals</option>
+          <option>XYZ Equipment Co</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Vendor</th>
+                <th>SKU</th>
+                <th>Qty</th>
+                <th>Rental Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Heavy Duty Excavator</td>
+                <td>ABC Rentals</td>
+                <td>EQ-EX-001</td>
+                <td>3</td>
+                <td>Rs 2,500/day</td>
+                <td><span class="badge badge-success">Published</span></td>
+              </tr>
+              <tr>
+                <td>Mobile Crane 50T</td>
+                <td>ABC Rentals</td>
+                <td>EQ-CR-001</td>
+                <td>2</td>
+                <td>Rs 8,000/day</td>
+                <td><span class="badge badge-success">Published</span></td>
+              </tr>
+              <tr>
+                <td>Industrial Forklift</td>
+                <td>ABC Rentals</td>
+                <td>EQ-FL-001</td>
+                <td>5</td>
+                <td>Rs 1,200/day</td>
+                <td><span class="badge badge-success">Published</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

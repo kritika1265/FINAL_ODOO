@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rental Orders - RentPro Vendor</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <span style="color: var(--color-text-muted);">Vendor: ABC Rentals</span>
+        <a href="../login.html" class="btn btn-secondary btn-sm">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3 style="margin-bottom: var(--space-lg); font-size: 1rem;">Vendor Portal</h3>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+        <a href="products.html" class="sidebar-link">My Products</a>
+        <a href="orders.html" class="sidebar-link active">Rental Orders</a>
+        <a href="invoices.html" class="sidebar-link">Invoices</a>
+        <a href="pickups.html" class="sidebar-link">Pickups & Returns</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-md);">
+        <div>
+          <h1>Rental Orders</h1>
+          <p>View and process rental orders</p>
+        </div>
+        <div style="display: flex; gap: var(--space-sm);">
+          <input type="date" class="form-input" style="width: 140px;">
+          <input type="date" class="form-input" style="width: 140px;">
+          <select class="form-select" style="width: 150px;">
+            <option>All Status</option>
+            <option>Draft</option>
+            <option>Confirmed</option>
+            <option>Picked Up</option>
+            <option>Returned</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Products</th>
+                <th>Rental Period</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#ORD-2025-012</strong></td>
+                <td>01 Feb 2025</td>
+                <td>BuildMax Ltd</td>
+                <td>Crane, Excavator</td>
+                <td>05 Feb - 15 Feb</td>
+                <td>₹85,000</td>
+                <td><span class="badge badge-info">Confirmed</span></td>
+                <td><button class="btn btn-primary btn-sm">Process</button></td>
+              </tr>
+              <tr>
+                <td><strong>#ORD-2025-011</strong></td>
+                <td>01 Feb 2025</td>
+                <td>Infra Solutions</td>
+                <td>Forklift</td>
+                <td>02 Feb - 06 Feb</td>
+                <td>₹5,664</td>
+                <td><span class="badge badge-success">Picked Up</span></td>
+                <td><button class="btn btn-secondary btn-sm">View</button></td>
+              </tr>
+              <tr>
+                <td><strong>#ORD-2025-010</strong></td>
+                <td>31 Jan 2025</td>
+                <td>XYZ Construction</td>
+                <td>Scissor Lift</td>
+                <td>03 Feb - 10 Feb</td>
+                <td>₹12,600</td>
+                <td><span class="badge badge-success">With Customer</span></td>
+                <td><button class="btn btn-secondary btn-sm">View</button></td>
+              </tr>
+              <tr>
+                <td><strong>#ORD-2025-009</strong></td>
+                <td>28 Jan 2025</td>
+                <td>ABC Construction</td>
+                <td>Excavator</td>
+                <td>30 Jan - 02 Feb</td>
+                <td>₹8,850</td>
+                <td><span class="badge badge-success">Returned</span></td>
+                <td><button class="btn btn-secondary btn-sm">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

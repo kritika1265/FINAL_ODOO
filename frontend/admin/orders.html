@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders - RentPro Admin</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <span style="color: var(--color-text-muted);">Admin</span>
+        <a href="../login.html" class="btn btn-secondary btn-sm">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3 style="margin-bottom: var(--space-lg); font-size: 1rem;">Admin Panel</h3>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+        <a href="vendors.html" class="sidebar-link">Vendors</a>
+        <a href="products.html" class="sidebar-link">Products</a>
+        <a href="orders.html" class="sidebar-link active">Orders</a>
+        <a href="reports.html" class="sidebar-link">Reports</a>
+        <a href="settings.html" class="sidebar-link">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-md);">
+        <div>
+          <h1>All Orders</h1>
+          <p>View all rental orders across vendors</p>
+        </div>
+        <div style="display: flex; gap: var(--space-sm);">
+          <input type="date" class="form-input" style="width: 140px;">
+          <input type="date" class="form-input" style="width: 140px;">
+          <select class="form-select" style="width: 150px;">
+            <option>All Status</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Vendor</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#ORD-2025-012</td>
+                <td>01 Feb 2025</td>
+                <td>BuildMax Ltd</td>
+                <td>ABC Rentals</td>
+                <td>Rs 85,000</td>
+                <td><span class="badge badge-info">Confirmed</span></td>
+              </tr>
+              <tr>
+                <td>#ORD-2025-011</td>
+                <td>01 Feb 2025</td>
+                <td>Infra Solutions</td>
+                <td>ABC Rentals</td>
+                <td>Rs 5,664</td>
+                <td><span class="badge badge-success">Picked Up</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Dashboard - RentPro</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <span style="color: var(--color-text-muted);">Vendor: ABC Rentals</span>
+        <a href="../login.html" class="btn btn-secondary btn-sm">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3 style="margin-bottom: var(--space-lg); font-size: 1rem;">Vendor Portal</h3>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link active">Dashboard</a>
+        <a href="products.html" class="sidebar-link">My Products</a>
+        <a href="orders.html" class="sidebar-link">Rental Orders</a>
+        <a href="invoices.html" class="sidebar-link">Invoices</a>
+        <a href="pickups.html" class="sidebar-link">Pickups & Returns</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Vendor Dashboard</h1>
+        <p>Manage your rental products and orders</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value">₹2,45,000</div>
+          <div class="stat-label">Total Revenue (MTD)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">24</div>
+          <div class="stat-label">Active Rentals</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">8</div>
+          <div class="stat-label">Pending Pickups</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Due Returns Today</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl);">
+        <div class="card">
+          <div class="card-header">Recent Orders</div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#ORD-2025-010</td>
+                  <td>XYZ Construction</td>
+                  <td>₹15,200</td>
+                  <td><span class="badge badge-info">Confirmed</span></td>
+                </tr>
+                <tr>
+                  <td>#ORD-2025-009</td>
+                  <td>BuildCo Pvt Ltd</td>
+                  <td>₹8,850</td>
+                  <td><span class="badge badge-success">Picked Up</span></td>
+                </tr>
+                <tr>
+                  <td>#ORD-2025-008</td>
+                  <td>Infra Solutions</td>
+                  <td>₹22,400</td>
+                  <td><span class="badge badge-warning">Pending Payment</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-body" style="border-top: 1px solid var(--color-border);">
+            <a href="orders.html" class="btn btn-secondary btn-sm">View All Orders</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Today's Pickups & Returns</div>
+          <div class="card-body">
+            <div style="margin-bottom: var(--space-lg);">
+              <h4 style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: var(--space-sm);">Pickups (4)</h4>
+              <ul>
+                <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between;">
+                  <span>#ORD-2025-010 - Crane</span>
+                  <a href="#" class="btn btn-primary btn-sm">View Doc</a>
+                </li>
+                <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between;">
+                  <span>#ORD-2025-011 - Forklift</span>
+                  <a href="#" class="btn btn-primary btn-sm">View Doc</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 style="font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: var(--space-sm);">Returns (5)</h4>
+              <ul>
+                <li style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border); display: flex; justify-content: space-between;">
+                  <span>#ORD-2025-005 - Excavator</span>
+                  <a href="#" class="btn btn-primary btn-sm">Process</a>
+                </li>
+                <li style="padding: var(--space-sm) 0; display: flex; justify-content: space-between;">
+                  <span>#ORD-2025-006 - Generator</span>
+                  <a href="#" class="btn btn-primary btn-sm">Process</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

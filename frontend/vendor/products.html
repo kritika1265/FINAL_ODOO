@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Products - RentPro Vendor</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <span style="color: var(--color-text-muted);">Vendor: ABC Rentals</span>
+        <a href="../login.html" class="btn btn-secondary btn-sm">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3 style="margin-bottom: var(--space-lg); font-size: 1rem;">Vendor Portal</h3>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+        <a href="products.html" class="sidebar-link active">My Products</a>
+        <a href="orders.html" class="sidebar-link">Rental Orders</a>
+        <a href="invoices.html" class="sidebar-link">Invoices</a>
+        <a href="pickups.html" class="sidebar-link">Pickups & Returns</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-md);">
+        <div>
+          <h1>Rental Products</h1>
+          <p>Manage your rentable products and pricing</p>
+        </div>
+        <button class="btn btn-primary">+ Add Product</button>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>SKU</th>
+                <th>Qty</th>
+                <th>Rental Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-md);">
+                    <img src="https://placehold.co/48x36/e2e8f0/64748b?text=EX" alt="" style="border-radius: var(--radius-sm);">
+                    <div>
+                      <strong>Heavy Duty Excavator</strong>
+                      <div style="font-size: 0.75rem; color: var(--color-text-muted);">₹150/hr, ₹2,500/day</div>
+                    </div>
+                  </div>
+                </td>
+                <td>EQ-EX-001</td>
+                <td>3</td>
+                <td>₹2,500/day</td>
+                <td><span class="badge badge-success">Published</span></td>
+                <td><button class="btn btn-secondary btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-md);">
+                    <img src="https://placehold.co/48x36/e2e8f0/64748b?text=CR" alt="" style="border-radius: var(--radius-sm);">
+                    <div>
+                      <strong>Mobile Crane 50T</strong>
+                      <div style="font-size: 0.75rem; color: var(--color-text-muted);">₹500/hr, ₹8,000/day</div>
+                    </div>
+                  </div>
+                </td>
+                <td>EQ-CR-001</td>
+                <td>2</td>
+                <td>₹8,000/day</td>
+                <td><span class="badge badge-success">Published</span></td>
+                <td><button class="btn btn-secondary btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-md);">
+                    <img src="https://placehold.co/48x36/e2e8f0/64748b?text=FL" alt="" style="border-radius: var(--radius-sm);">
+                    <div>
+                      <strong>Industrial Forklift</strong>
+                      <div style="font-size: 0.75rem; color: var(--color-text-muted);">₹1,200/day</div>
+                    </div>
+                  </div>
+                </td>
+                <td>EQ-FL-001</td>
+                <td>5</td>
+                <td>₹1,200/day</td>
+                <td><span class="badge badge-success">Published</span></td>
+                <td><button class="btn btn-secondary btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div style="display: flex; align-items: center; gap: var(--space-md);">
+                    <img src="https://placehold.co/48x36/e2e8f0/64748b?text=GEN" alt="" style="border-radius: var(--radius-sm);">
+                    <div>
+                      <strong>Diesel Generator 100KVA</strong>
+                      <div style="font-size: 0.75rem; color: var(--color-text-muted);">₹50/hr, ₹500/day</div>
+                    </div>
+                  </div>
+                </td>
+                <td>EQ-GEN-001</td>
+                <td>8</td>
+                <td>₹500/day</td>
+                <td><span class="badge badge-warning">Draft</span></td>
+                <td><button class="btn btn-secondary btn-sm">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

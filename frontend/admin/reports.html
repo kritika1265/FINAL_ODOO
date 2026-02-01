@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports - RentPro Admin</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <span style="color: var(--color-text-muted);">Admin</span>
+        <a href="../login.html" class="btn btn-secondary btn-sm">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3 style="margin-bottom: var(--space-lg); font-size: 1rem;">Admin Panel</h3>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+        <a href="vendors.html" class="sidebar-link">Vendors</a>
+        <a href="products.html" class="sidebar-link">Products</a>
+        <a href="orders.html" class="sidebar-link">Orders</a>
+        <a href="reports.html" class="sidebar-link active">Reports</a>
+        <a href="settings.html" class="sidebar-link">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-md);">
+        <div>
+          <h1>Reports</h1>
+          <p>Generate and export business reports</p>
+        </div>
+        <div style="display: flex; gap: var(--space-sm);">
+          <input type="date" class="form-input" style="width: 140px;">
+          <input type="date" class="form-input" style="width: 140px;">
+          <select class="form-select" style="width: 120px;">
+            <option>PDF</option>
+            <option>XLSX</option>
+            <option>CSV</option>
+          </select>
+          <button class="btn btn-primary">Export</button>
+        </div>
+      </div>
+
+      <div class="grid grid-3" style="margin-bottom: var(--space-xl);">
+        <div class="card card-body">
+          <h3 style="margin-bottom: var(--space-sm);">Revenue Report</h3>
+          <p style="color: var(--color-text-muted); font-size: 0.875rem; margin-bottom: var(--space-md);">Total rental revenue by date range with vendor breakdown.</p>
+          <button class="btn btn-secondary btn-sm">Generate</button>
+        </div>
+        <div class="card card-body">
+          <h3 style="margin-bottom: var(--space-sm);">Orders Report</h3>
+          <p style="color: var(--color-text-muted); font-size: 0.875rem; margin-bottom: var(--space-md);">All rental orders with status and customer details.</p>
+          <button class="btn btn-secondary btn-sm">Generate</button>
+        </div>
+        <div class="card card-body">
+          <h3 style="margin-bottom: var(--space-sm);">Product Usage</h3>
+          <p style="color: var(--color-text-muted); font-size: 0.875rem; margin-bottom: var(--space-md);">Most rented products and utilization rates.</p>
+          <button class="btn btn-secondary btn-sm">Generate</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Recent Exports</div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Report</th>
+                <th>Date Range</th>
+                <th>Generated</th>
+                <th>Format</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Revenue Report</td>
+                <td>01 Jan - 31 Jan 2025</td>
+                <td>01 Feb 2025</td>
+                <td>PDF</td>
+              </tr>
+              <tr>
+                <td>Orders Report</td>
+                <td>01 Jan - 31 Jan 2025</td>
+                <td>01 Feb 2025</td>
+                <td>XLSX</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice #INV-2025-001 - RentPro</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    @media print {
+      body { background: white; }
+      .no-print { display: none !important; }
+      .card { box-shadow: none; border: 1px solid #e2e8f0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="no-print" style="padding: var(--space-lg); display: flex; gap: var(--space-md);">
+    <button onclick="window.print()" class="btn btn-primary">Print Invoice</button>
+    <a href="customer/invoices.html" class="btn btn-secondary">Back to Invoices</a>
+  </div>
+
+  <div class="card" style="max-width: 800px; margin: var(--space-xl) auto; padding: var(--space-2xl);">
+    <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2xl); border-bottom: 2px solid var(--color-primary); padding-bottom: var(--space-lg);">
+      <div>
+        <h1 style="color: var(--color-primary);">RentPro</h1>
+        <p style="color: var(--color-text-muted); font-size: 0.875rem;">Rental Management System</p>
+        <p style="margin-top: var(--space-md);">123 Business Park<br>Mumbai, Maharashtra 400001<br>GSTIN: 27AABCU9603R1ZM</p>
+      </div>
+      <div style="text-align: right;">
+        <h2 style="font-size: 1.5rem;">TAX INVOICE</h2>
+        <p style="margin-top: var(--space-md);"><strong>Invoice #</strong> INV-2025-001</p>
+        <p><strong>Date:</strong> 25 Jan 2025</p>
+        <p><strong>Order:</strong> #ORD-2025-001</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); margin-bottom: var(--space-2xl);">
+      <div>
+        <strong style="font-size: 0.75rem; color: var(--color-text-muted);">BILL TO</strong>
+        <p style="margin-top: var(--space-sm);">ABC Construction Pvt Ltd<br>123 Industrial Area, Mumbai<br>GSTIN: 27AABCU9603R1ZM</p>
+      </div>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Description</th>
+          <th>Period</th>
+          <th>Qty</th>
+          <th>Rate</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Heavy Duty Excavator - Rental</td>
+          <td>03 Feb - 06 Feb 2025 (3 days)</td>
+          <td>1</td>
+          <td>Rs 2,500/day</td>
+          <td>Rs 7,500</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display: flex; justify-content: flex-end; margin-top: var(--space-xl);">
+      <div style="width: 300px;">
+        <div style="display: flex; justify-content: space-between; padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border);">
+          <span>Subtotal</span>
+          <span>Rs 7,500</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border);">
+          <span>GST (18%)</span>
+          <span>Rs 1,350</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding: var(--space-md) 0; font-weight: 700; font-size: 1.25rem;">
+          <span>Total</span>
+          <span>Rs 8,850</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--space-2xl); padding-top: var(--space-lg); border-top: 1px solid var(--color-border); font-size: 0.875rem; color: var(--color-text-muted);">
+      <p><strong>Payment Status:</strong> Paid</p>
+      <p style="margin-top: var(--space-md);">Thank you for your business!</p>
+    </div>
+  </div>
+</body>
+</html>

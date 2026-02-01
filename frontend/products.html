@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - RentPro</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link active">Products</a>
+        <a href="cart.html" class="nav-link">Cart (2)</a>
+        <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+        <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-md);">
+      <div>
+        <h1>Rentable Products</h1>
+        <p>Browse and rent from our catalog. Filter by category, price, or availability.</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 240px 1fr; gap: var(--space-xl);">
+      <!-- Filters sidebar -->
+      <aside class="card" style="height: fit-content; position: sticky; top: 80px;">
+        <div class="card-header">Filters</div>
+        <div class="card-body">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-select">
+              <option>All Categories</option>
+              <option>Construction</option>
+              <option>Vehicles</option>
+              <option>Power Equipment</option>
+              <option>Warehouse</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Rental Period</label>
+            <select class="form-select">
+              <option>Any</option>
+              <option>Hourly</option>
+              <option>Daily</option>
+              <option>Weekly</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Price Range</label>
+            <div style="display: flex; gap: var(--space-sm); align-items: center;">
+              <input type="number" class="form-input" placeholder="Min" style="width: 100%;">
+              <span>-</span>
+              <input type="number" class="form-input" placeholder="Max" style="width: 100%;">
+            </div>
+          </div>
+          <button class="btn btn-primary" style="width: 100%;">Apply Filters</button>
+        </div>
+      </aside>
+
+      <!-- Product grid -->
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-lg);">
+          <p style="color: var(--color-text-muted);">Showing 12 products</p>
+          <select class="form-select" style="width: 180px;">
+            <option>Sort: Price Low to High</option>
+            <option>Sort: Price High to Low</option>
+            <option>Sort: Newest First</option>
+          </select>
+        </div>
+
+        <div class="grid grid-3">
+          <a href="product-detail.html?id=1" class="card product-card">
+            <div class="product-image">
+              <img src="excavator.png" alt="Excavator">
+            </div>
+            <div class="card-body product-info">
+              <h3 class="product-title">Heavy Duty Excavator</h3>
+              <p class="product-meta">Construction • In Stock</p>
+              <p class="product-price">₹2,500/day • ₹150/hr</p>
+            </div>
+          </a>
+          <a href="product-detail.html?id=2" class="card product-card">
+            <div class="product-image">
+              <img src="crane.png" alt="Crane">
+            </div>
+            <div class="card-body product-info">
+              <h3 class="product-title">Mobile Crane 50T</h3>
+              <p class="product-meta">Lifting • In Stock</p>
+              <p class="product-price">₹8,000/day • ₹500/hr</p>
+            </div>
+          </a>
+          <a href="product-detail.html?id=3" class="card product-card">
+            <div class="product-image">
+              <img src="Forklift.png" alt="Forklift">
+            </div>
+            <div class="card-body product-info">
+              <h3 class="product-title">Industrial Forklift</h3>
+              <p class="product-meta">Warehouse • In Stock</p>
+              <p class="product-price">₹1,200/day</p>
+            </div>
+          </a>
+          <a href="product-detail.html?id=4" class="card product-card">
+            <div class="product-image">
+              <img src="generator.png" alt="Generator">
+            </div>
+            <div class="card-body product-info">
+              <h3 class="product-title">Diesel Generator 100KVA</h3>
+              <p class="product-meta">Power • In Stock</p>
+              <p class="product-price">₹500/day • ₹50/hr</p>
+            </div>
+          </a>
+          <a href="product-detail.html?id=5" class="card product-card">
+            <div class="product-image">
+              <img src="scissor-lift.png" alt="Scissor Lift">
+            </div>
+            <div class="card-body product-info">
+              <h3 class="product-title">Scissor Lift 12m</h3>
+              <p class="product-meta">Construction • In Stock</p>
+              <p class="product-price">₹1,800/day</p>
+            </div>
+          </a>
+          <a href="product-detail.html?id=4" class="card product-card">
+            <div class="product-image">
+              <img src="flat.png" alt="flat">
+            </div>
+            <div class="card-body product-info">
+              <h3 class="product-title">flat 4BHK</h3>
+              <p class="product-meta">Fully Furnished • In Stock</p>
+              <p class="product-price">₹15000/month</p>
+            </div>
+          </a>
+          <a href="product-detail.html?id=5" class="card product-card">
+            <div class="product-image">
+              <img src="wheelchair.png" alt="Wheelchair Lift">
+            </div>
+            <div class="card-body product-info">
+              <h3 class="product-title">Wheelchair Lift 12m</h3>
+              <p class="product-meta">Accessibility • In Stock</p>
+              <p class="product-price">₹200/day</p>
+            </div>
+          </a>
+          <a href="product-detail.html?id=6" class="card product-card">
+            <div class="product-image">
+              <img src="concrete-mixer.png" alt="Concrete Mixer">
+            </div>
+            <div class="card-body product-info">
+              <h3 class="product-title">Concrete Mixer 400L</h3>
+              <p class="product-meta">Construction • In Stock</p>
+              <p class="product-price">₹350/day</p>
+            </div>
+          </a>
+        </div>
+
+        <nav style="display: flex; justify-content: center; gap: var(--space-sm); margin-top: var(--space-xl);">
+          <button class="btn btn-secondary btn-sm" disabled>Previous</button>
+          <button class="btn btn-primary btn-sm">1</button>
+          <button class="btn btn-secondary btn-sm">2</button>
+          <button class="btn btn-secondary btn-sm">Next</button>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2025 RentPro - Rental Management System</span>
+      <div style="display: flex; gap: var(--space-lg);">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+  <script src="js/app.js"></script>
+</body>
+</html>

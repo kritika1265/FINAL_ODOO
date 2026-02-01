@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pickups & Returns - RentPro Vendor</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <span style="color: var(--color-text-muted);">Vendor: ABC Rentals</span>
+        <a href="../login.html" class="btn btn-secondary btn-sm">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3 style="margin-bottom: var(--space-lg); font-size: 1rem;">Vendor Portal</h3>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+        <a href="products.html" class="sidebar-link">My Products</a>
+        <a href="orders.html" class="sidebar-link">Rental Orders</a>
+        <a href="invoices.html" class="sidebar-link">Invoices</a>
+        <a href="pickups.html" class="sidebar-link active">Pickups & Returns</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Pickups & Returns</h1>
+        <p>Track pickups, mark items as with customer, and process returns</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl);">
+        <div class="card">
+          <div class="card-header">Pending Pickups</div>
+          <div class="card-body">
+            <p style="color: var(--color-text-muted); margin-bottom: var(--space-md);">Orders confirmed and paid. Ready for customer pickup.</p>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Product</th>
+                    <th>Pickup Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#ORD-2025-012</td>
+                    <td>Crane, Excavator</td>
+                    <td>05 Feb 2025</td>
+                    <td><button class="btn btn-primary btn-sm">Generate Pickup Doc</button></td>
+                  </tr>
+                  <tr>
+                    <td>#ORD-2025-013</td>
+                    <td>Forklift</td>
+                    <td>03 Feb 2025</td>
+                    <td><button class="btn btn-primary btn-sm">Mark Picked Up</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Due Returns</div>
+          <div class="card-body">
+            <p style="color: var(--color-text-muted); margin-bottom: var(--space-md);">Rentals ending today or overdue. Process returns to restore stock.</p>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Product</th>
+                    <th>Return Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#ORD-2025-005</td>
+                    <td>Excavator</td>
+                    <td>01 Feb 2025</td>
+                    <td><button class="btn btn-primary btn-sm">Process Return</button></td>
+                  </tr>
+                  <tr>
+                    <td>#ORD-2025-006</td>
+                    <td>Generator</td>
+                    <td>01 Feb 2025</td>
+                    <td><span class="badge badge-error">Overdue</span> <button class="btn btn-primary btn-sm">Process Return</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

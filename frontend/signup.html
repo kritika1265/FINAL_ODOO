@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - RentPro</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container container-sm" style="padding-top: var(--space-2xl); padding-bottom: var(--space-2xl);">
+    <div class="card card-body">
+      <h1 style="text-align: center; margin-bottom: var(--space-sm);">Create Account</h1>
+      <p style="text-align: center; color: var(--color-text-muted); margin-bottom: var(--space-xl);">Sign up to rent products and manage orders</p>
+
+      <form>
+        <div class="form-group">
+          <label class="form-label">Full Name *</label>
+          <input type="text" name="full_name" class="form-input" placeholder="xx xx" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input type="email" name="email" class="form-input" placeholder="xx@gmail.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company Name *</label>
+          <input type="text" name="company_name" class="form-input" placeholder="Your Company Pvt Ltd" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">GSTIN * (Mandatory for invoicing)</label>
+          <input type="text" name="gstin" class="form-input" placeholder="xyz" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="tel" name="phone" class="form-input" placeholder="------">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password *</label>
+          <input type="password" name="password" class="form-input" placeholder="Min 8 characters" required minlength="8">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm Password *</label>
+          <input type="password" name="confirm-password" class="form-input" placeholder="Confirm password" required minlength="8">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Coupon Code (optional)</label>
+          <input type="text" class="form-input" placeholder="Apply discount coupon">
+        </div>
+        <div class="form-group">
+          <label style="display: flex; align-items: flex-start; gap: var(--space-sm); font-size: 0.875rem;">
+            <input type="checkbox" required style="margin-top: 4px;">
+            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Create Account</button>
+      </form>
+
+      <p style="text-align: center; margin-top: var(--space-lg); color: var(--color-text-muted);">
+        Already have an account? <a href="login.html">Login</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2025 RentPro - Rental Management System</span>
+    </div>
+  </footer>
+</body>
+</html>

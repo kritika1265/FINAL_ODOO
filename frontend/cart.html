@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart - RentPro</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="cart.html" class="nav-link active">Cart (2)</a>
+        <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+        <a href="signup.html" class="btn btn-primary btn-sm">Sign Up</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>Rental Quotation</h1>
+      <p>Review your items and rental periods. Editable until confirmation.</p>
+    </div>
+
+    <div class="alert alert-success">
+      This is a quotation. Your items are reserved for 24 hours. Confirm your order to proceed with payment.
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 380px; gap: var(--space-xl);">
+      <div>
+        <div class="card">
+          <div class="card-header">Items in Quotation</div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Period</th>
+                  <th>Qty</th>
+                  <th>Rate</th>
+                  <th>Amount</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: var(--space-md);">
+                      <img src="Excavator.png" alt="" style="border-radius: var(--radius-sm);">
+                      <div>
+                        <strong>Heavy Duty Excavator</strong>
+                        <div style="font-size: 0.875rem; color: var(--color-text-muted);">03 Feb - 06 Feb 2025</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>3 days</td>
+                  <td>1</td>
+                  <td>₹2,500/day</td>
+                  <td>₹7,500</td>
+                  <td><button class="btn btn-secondary btn-sm" onclick="removeFromCart(${index})">Remove</button></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: var(--space-md);">
+                      <img src="Forklift.png" alt="" style="border-radius: var(--radius-sm);">
+                      <div>
+                        <strong>Industrial Forklift</strong>
+                        <div style="font-size: 0.875rem; color: var(--color-text-muted);">04 Feb - 08 Feb 2025</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td>                 4 days</td>
+                  <td>1</td>
+                  <td>₹1,200/day</td>
+                  <td>₹4,800</td>
+                  <td><button class="btn btn-secondary btn-sm">Remove</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="margin-top: var(--space-lg);">
+          <a href="products.html" class="btn btn-secondary">Continue Shopping</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="card card-body" style="position: sticky; top: 80px;">
+          <h3 style="margin-bottom: var(--space-lg);">Quotation Summary</h3>
+
+          <div class="form-group">
+            <label class="form-label">Coupon Code</label>
+            <div style="display: flex; gap: var(--space-sm);">
+              <input type="text" class="form-input" placeholder="Enter code">
+              <button class="btn btn-secondary">Apply</button>
+            </div>
+          </div>
+
+          <div style="border-top: 1px solid var(--color-border); padding-top: var(--space-md); margin-bottom: var(--space-md);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-sm);">
+              <span>Subtotal</span>
+              <span>₹12,300</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-sm);">
+              <span>GST (18%)</span>
+              <span>₹2,214</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.25rem; padding-top: var(--space-md);">
+              <span>Total</span>
+              <span style="color: var(--color-primary);">₹14,514</span>
+            </div>
+          </div>
+
+          <a href="checkout.html" class="btn btn-primary btn-lg" style="width: 100%; margin-bottom: var(--space-sm);">
+            Confirm Order and Proceed to Payment
+          </a>
+          <p style="font-size: 0.875rem; color: var(--color-text-muted); text-align: center;">
+            By confirming, you agree to our rental terms. Stock will be reserved upon order confirmation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2025 RentPro - Rental Management System</span>
+      <div style="display: flex; gap: var(--space-lg);">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

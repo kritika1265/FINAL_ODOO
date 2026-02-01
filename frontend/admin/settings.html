@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - RentPro Admin</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <span style="color: var(--color-text-muted);">Admin</span>
+        <a href="../login.html" class="btn btn-secondary btn-sm">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3 style="margin-bottom: var(--space-lg); font-size: 1rem;">Admin Panel</h3>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+        <a href="vendors.html" class="sidebar-link">Vendors</a>
+        <a href="products.html" class="sidebar-link">Products</a>
+        <a href="orders.html" class="sidebar-link">Orders</a>
+        <a href="reports.html" class="sidebar-link">Reports</a>
+        <a href="settings.html" class="sidebar-link active">Settings</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Settings</h1>
+        <p>Configure rental periods, attributes, and company details</p>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-xl);">
+        <div class="card-header">Rental Periods</div>
+        <div class="card-body">
+          <p style="color: var(--color-text-muted); margin-bottom: var(--space-lg);">Configure available rental period options (Hourly, Daily, Weekly).</p>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Period</th>
+                  <th>Enabled</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hourly</td>
+                  <td><span class="badge badge-success">Yes</span></td>
+                  <td><button class="btn btn-secondary btn-sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>Daily</td>
+                  <td><span class="badge badge-success">Yes</span></td>
+                  <td><button class="btn btn-secondary btn-sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>Weekly</td>
+                  <td><span class="badge badge-success">Yes</span></td>
+                  <td><button class="btn btn-secondary btn-sm">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-xl);">
+        <div class="card-header">Product Attributes</div>
+        <div class="card-body">
+          <p style="color: var(--color-text-muted); margin-bottom: var(--space-lg);">Manage product attributes (e.g., Brand, Color) and their values.</p>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Attribute</th>
+                  <th>Values</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Brand</td>
+                  <td>Caterpillar, Komatsu, JCB, Volvo</td>
+                  <td><button class="btn btn-secondary btn-sm">Edit</button></td>
+                </tr>
+                <tr>
+                  <td>Color</td>
+                  <td>Yellow, Orange, White</td>
+                  <td><button class="btn btn-secondary btn-sm">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button class="btn btn-primary" style="margin-top: var(--space-md);">+ Add Attribute</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-xl);">
+        <div class="card-header">Company & GST Details</div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label class="form-label">Company Name</label>
+              <input type="text" class="form-input" value="RentPro Pvt Ltd">
+            </div>
+            <div class="form-group">
+              <label class="form-label">GSTIN</label>
+              <input type="text" class="form-input" value="27AABCU9603R1ZM">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Address</label>
+              <textarea class="form-textarea">123 Business Park, Mumbai, Maharashtra</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">User Roles</div>
+        <div class="card-body">
+          <p style="color: var(--color-text-muted); margin-bottom: var(--space-lg);">Admin, Vendor, and Customer role permissions.</p>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Admin</td>
+                  <td>Full system access - Settings, Users, Reports</td>
+                </tr>
+                <tr>
+                  <td>Vendor</td>
+                  <td>Manage products, orders, invoices, pickups & returns</td>
+                </tr>
+                <tr>
+                  <td>Customer</td>
+                  <td>Browse products, create orders, view invoices</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

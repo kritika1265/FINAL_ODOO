@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - RentPro</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="cart.html" class="nav-link">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <h1>Checkout</h1>
+      <p>Complete your rental order. Login or continue as guest.</p>
+    </div>
+
+    <!-- Checkout steps -->
+    <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-xl); flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: var(--space-sm);">
+        <span style="width: 32px; height: 32px; background: var(--color-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">1</span>
+        <span>Address & Details</span>
+      </div>
+      <span style="color: var(--color-border);">→</span>
+      <div style="display: flex; align-items: center; gap: var(--space-sm);">
+        <span style="width: 32px; height: 32px; background: var(--color-border); color: var(--color-text-muted); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">2</span>
+        <span style="color: var(--color-text-muted);">Payment</span>
+      </div>
+      <span style="color: var(--color-border);">→</span>
+      <div style="display: flex; align-items: center; gap: var(--space-sm);">
+        <span style="width: 32px; height: 32px; background: var(--color-border); color: var(--color-text-muted); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600;">3</span>
+        <span style="color: var(--color-text-muted);">Confirmation</span>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 400px; gap: var(--space-xl);">
+      <div>
+        <form>
+          <div class="card card-body" style="margin-bottom: var(--space-lg);">
+            <h3 style="margin-bottom: var(--space-lg);">Delivery / Pickup Address</h3>
+            <div class="form-group">
+              <label class="form-label">Address Type</label>
+              <select class="form-select">
+                <option>Pickup from Store</option>
+                <option>Delivery to Site</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Full Address</label>
+              <textarea class="form-textarea" placeholder="Street, City, State, PIN">123 Industrial Area, Sector 5, Mumbai, Maharashtra 400001</textarea>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+              <div class="form-group">
+                <label class="form-label">City</label>
+                <input type="text" class="form-input" value="Mumbai">
+              </div>
+              <div class="form-group">
+                <label class="form-label">PIN Code</label>
+                <input type="text" class="form-input" value="400001">
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-body" style="margin-bottom: var(--space-lg);">
+            <h3 style="margin-bottom: var(--space-lg);">Billing Information</h3>
+            <p style="color: var(--color-text-muted); margin-bottom: var(--space-md);">Required for invoicing. GSTIN is mandatory.</p>
+            <div class="form-group">
+              <label class="form-label">Company Name</label>
+              <input type="text" class="form-input" value="ABC Construction Pvt Ltd" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">GSTIN *</label>
+              <input type="text" class="form-input" placeholder="e.g. 27AABCU9603R1ZM" value="27AABCU9603R1ZM" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Contact Person</label>
+              <input type="text" class="form-input" value="xxx">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="tel" class="form-input" value="+91 98765 43210">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: var(--space-md);">
+            <a href="cart.html" class="btn btn-secondary">Back to Cart</a>
+            <a href="checkout-payment.html" class="btn btn-primary">Proceed to Payment</a>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <div class="card card-body" style="position: sticky; top: 80px;">
+          <h3 style="margin-bottom: var(--space-lg);">Order Summary</h3>
+          <div style="margin-bottom: var(--space-lg);">
+            <div style="display: flex; justify-content: space-between; padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border);">
+              <span>Excavator × 3 days</span>
+              <span>₹7,500</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border);">
+              <span>Forklift × 4 days</span>
+              <span>₹4,800</span>
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-sm);">
+            <span>Subtotal</span>
+            <span>₹12,300</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-md);">
+            <span>GST</span>
+            <span>₹2,214</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 1.25rem; padding-top: var(--space-md); border-top: 2px solid var(--color-border);">
+            <span>Total</span>
+            <span style="color: var(--color-primary);">₹14,514</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>© 2025 RentPro - Rental Management System</span>
+      <div style="display: flex; gap: var(--space-lg);">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - RentPro</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Rent<span>Pro</span></a>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 600px; padding-top: var(--space-2xl); padding-bottom: var(--space-2xl);">
+    <div class="card card-body">
+      <h1 style="text-align: center; margin-bottom: var(--space-sm);">Complete Payment</h1>
+      <p style="text-align: center; color: var(--color-text-muted); margin-bottom: var(--space-xl);">Order Total: Rs 14,514</p>
+
+      <form>
+        <div class="form-group">
+          <label class="form-label">Payment Method</label>
+          <select class="form-select">
+            <option>Credit / Debit Card</option>
+            <option>UPI</option>
+            <option>Net Banking</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Card Number</label>
+          <input type="text" class="form-input" placeholder="4111 1111 1111 1111">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+          <div class="form-group">
+            <label class="form-label">Expiry</label>
+            <input type="text" class="form-input" placeholder="MM/YY">
+          </div>
+          <div class="form-group">
+            <label class="form-label">CVV</label>
+            <input type="text" class="form-input" placeholder="123">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Payment Type</label>
+          <div style="display: flex; gap: var(--space-lg);">
+            <label><input type="radio" name="payment-type" checked> Full Payment</label>
+            <label><input type="radio" name="payment-type"> Partial + Security Deposit</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">Pay Rs 14,514</button>
+      </form>
+
+      <p style="text-align: center; margin-top: var(--space-lg); font-size: 0.875rem; color: var(--color-text-muted);">
+        <a href="checkout.html">← Back to Checkout</a>
+      </p>
+    </div>
+  </main>
+  <script src="js/app.js"></script>
+</body>
+</html>

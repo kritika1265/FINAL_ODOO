@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoices - RentPro Vendor</title>
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Rent<span>Pro</span></a>
+      <nav class="nav">
+        <span style="color: var(--color-text-muted);">Vendor: ABC Rentals</span>
+        <a href="../login.html" class="btn btn-secondary btn-sm">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <aside class="sidebar">
+      <h3 style="margin-bottom: var(--space-lg); font-size: 1rem;">Vendor Portal</h3>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="sidebar-link">Dashboard</a>
+        <a href="products.html" class="sidebar-link">My Products</a>
+        <a href="orders.html" class="sidebar-link">Rental Orders</a>
+        <a href="invoices.html" class="sidebar-link active">Invoices</a>
+        <a href="pickups.html" class="sidebar-link">Pickups & Returns</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--space-md);">
+        <div>
+          <h1>Invoices</h1>
+          <p>Create and manage rental invoices</p>
+        </div>
+        <div style="display: flex; gap: var(--space-sm);">
+          <button class="btn btn-secondary btn-sm">Export CSV</button>
+          <button class="btn btn-primary">+ Create Invoice</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Invoice #</th>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#INV-2025-012</strong></td>
+                <td>#ORD-2025-012</td>
+                <td>BuildMax Ltd</td>
+                <td>01 Feb 2025</td>
+                <td>₹85,000</td>
+                <td><span class="badge badge-success">Paid</span></td>
+                <td><button class="btn btn-secondary btn-sm">Print</button></td>
+              </tr>
+              <tr>
+                <td><strong>#INV-2025-011</strong></td>
+                <td>#ORD-2025-011</td>
+                <td>Infra Solutions</td>
+                <td>01 Feb 2025</td>
+                <td>₹5,664</td>
+                <td><span class="badge badge-success">Paid</span></td>
+                <td><button class="btn btn-secondary btn-sm">Print</button></td>
+              </tr>
+              <tr>
+                <td><strong>#INV-2025-010</strong></td>
+                <td>#ORD-2025-010</td>
+                <td>XYZ Construction</td>
+                <td>31 Jan 2025</td>
+                <td>₹12,600</td>
+                <td><span class="badge badge-success">Paid</span></td>
+                <td><button class="btn btn-secondary btn-sm">Print</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
